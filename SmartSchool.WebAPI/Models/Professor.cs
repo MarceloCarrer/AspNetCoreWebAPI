@@ -18,6 +18,6 @@ namespace SmartSchool.WebAPI.Models
         
         public int Id { get; set; }
         public string Nome { get; set; }
-        public IEnumerable<Disciplina> Disciplina { get; set; }
+        public IEnumerable<Disciplina> Disciplinas { get; set; }
     }
 }
