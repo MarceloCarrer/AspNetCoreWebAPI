@@ -44,7 +44,7 @@ namespace SmartSchool.WebAPI.Data
                              .ThenInclude(d => d.Professor);
             }
 
-            query = query.AsNoTracking().OrderBy(a => a.Nome);
+            query = query.AsNoTracking().OrderBy(a => a.Id);
 
             return query.ToArray();
         }
@@ -98,7 +98,7 @@ namespace SmartSchool.WebAPI.Data
                              .ThenInclude(ad => ad.Aluno);
             }
 
-            query = query.AsNoTracking().OrderBy(p => p.Nome);
+            query = query.AsNoTracking().OrderBy(p => p.Id);
 
             return query.ToArray();
         }
