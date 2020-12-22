@@ -1,85 +1,43 @@
+using System.Threading.Tasks;
+using SmartSchool.WebAPI.Helpers;
 using SmartSchool.WebAPI.Models;
 
 namespace SmartSchool.WebAPI.Data
 {
-    /// <summary>
-    /// Interface da classe de repositorio
-    /// </summary>
     public interface IRepository
-    {
-        /// <summary>
-        /// Metodo de cadastar novo
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity"></param>
+    {        
         void Add<T>(T entity) where T : class;
 
-        /// <summary>
-        /// Metodo de atualizar
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity"></param>
         void Update<T>(T entity) where T : class;
 
-        /// <summary>
-        /// Metodo de deletar
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity"></param>
         void Delete<T>(T entity) where T : class;
 
-        /// <summary>
-        /// Metodo de salvar
-        /// </summary>
-        /// <returns></returns>
         bool SaveChanges();
 
+        
+        Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool includeProfessor = false);
 
-        /// <summary>
-        /// Metodo de listar alunos
-        /// </summary>
-        /// <param name="includeProfessor"></param>
-        /// <returns></returns>
         Aluno[] GetAllAlunos(bool includeProfessor = false);
+        
+        Task<Aluno[]> GetAllAlunosByDisciplinaIdAsync(int disciplinaId, bool includeProfessor = false);
 
-        /// <summary>
-        /// Metodo de listar aluno e disciplinas por Id
-        /// </summary>
-        /// <param name="disciplinaId"></param>
-        /// <param name="includeProfessor"></param>
-        /// <returns></returns>
         Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessor = false);
 
-        /// <summary>
-        /// Metodo de listar aluno por Id
-        /// </summary>
-        /// <param name="alunoId"></param>
-        /// <param name="includeProfessor"></param>
-        /// <returns></returns>
+        Task<Aluno> GetAlunoByIdAsync(int alunoId, bool includeProfessor = false);
+
         Aluno GetAlunoById(int alunoId, bool includeProfessor = false);
 
 
-        /// <summary>
-        /// Metodo de listar professores
-        /// </summary>
-        /// <param name="includeAlunos"></param>
-        /// <returns></returns>
+        Task<Professor[]> GetAllProfessoresAsync(bool includeAlunos = false);
+
         Professor[] GetAllProfessores(bool includeAlunos = false);
 
-        /// <summary>
-        /// Metodo de listar professor e disciplinas por Id
-        /// </summary>
-        /// <param name="disciplinaId"></param>
-        /// <param name="includeAlunos"></param>
-        /// <returns></returns>
+        Task<Professor[]> GetAllProfessoresByDisciplinaIdAsync(int disciplinaId, bool includeAlunos = false);
+
         Professor[] GetAllProfessoresByDisciplinaId(int disciplinaId, bool includeAlunos = false);
 
-        /// <summary>
-        /// Metodo de listar professor por Id
-        /// </summary>
-        /// <param name="professorId"></param>
-        /// <param name="includeProfessor"></param>
-        /// <returns></returns>
+        Task<Professor> GetProfessorByIdAsync(int professorId, bool includeProfessor = false);
+
         Professor GetProfessorById(int professorId, bool includeProfessor = false);
 
     }
