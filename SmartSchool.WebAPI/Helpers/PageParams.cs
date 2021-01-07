@@ -6,12 +6,12 @@ namespace SmartSchool.WebAPI.Helpers
 
         public int PageNumber { get; set; } = 1;
 
-        private int PageSize = 10;
+        private int PageSize_ = 10;
 
-        public int PageSizeCalc
+        public int PageSize
         {
-            get { return PageSize; }
-            set { PageSize = (value > MaxPageSize) ? MaxPageSize : value; }
+            get { return PageSize_; }
+            set { PageSize_ = (value > MaxPageSize) ? MaxPageSize : value; }
         }
 
         public int? Matricula { get; set; } = null;

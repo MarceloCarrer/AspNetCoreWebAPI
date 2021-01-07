@@ -38,7 +38,9 @@ namespace SmartSchool.WebAPI.Data
 
         Task<Professor> GetProfessorByIdAsync(int professorId, bool includeProfessor = false);
 
-        Professor GetProfessorById(int professorId, bool includeProfessor = false);
+        Professor GetProfessorById(int professorId, bool includeAlunos = false);
+
+        Professor[] GetProfessoresByAlunoId(int alunoId, bool includeAlunos = false);
 
     }
 }

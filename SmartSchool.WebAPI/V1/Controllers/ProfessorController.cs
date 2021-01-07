@@ -44,6 +44,16 @@ namespace SmartSchool.WebAPI.V1.Controllers
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("getRegister")]
+        public IActionResult GetRegister()
+        {
+            return Ok(new ProfessorRegistrarDto());
+        }
+
+        /// <summary>
         /// Metodo responsavel para retornar apenas um professor por Id
         /// </summary>
         /// <param name="id"></param>
@@ -52,7 +62,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
         [HttpGet("ById/{id}")]
         public IActionResult GetById(int id)
         {
-            var professor = this.repo.GetProfessorById(id, false);
+            var professor = this.repo.GetProfessorById(id, true);
 
             if (professor == null)
             {
@@ -61,7 +71,26 @@ namespace SmartSchool.WebAPI.V1.Controllers
 
             var professorDto = this.mapper.Map<ProfessorDto>(professor);
 
-            return Ok(professorDto);
+            return Ok(professor);
+        }
+
+        /// <summary>
+        /// Metodo responsavel para retornar apenas um professor por Id
+        /// </summary>
+        /// <param name="alunoId"></param>
+        /// <returns></returns>
+        // api/professor/ById
+        [HttpGet("ByAluno/{alunoId}")]
+        public IActionResult GetByAlunoId(int alunoId)
+        {
+            var professores = this.repo.GetProfessoresByAlunoId(alunoId, true);
+
+            if (professores == null)
+            {
+                return BadRequest("Professores não encontrados.");
+            }
+
+            return Ok(this.mapper.Map<IEnumerable<ProfessorDto>>(professores));
         }
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace SmartSchool.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SmartContext>(
-                context => context.UseSqlite(Configuration.GetConnectionString("Default"))
+                context => context.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"))
             );
            
             services.AddControllers()
@@ -91,6 +91,7 @@ namespace SmartSchool.WebAPI
             opt.IncludeXmlComments(xmlCommentsFullPath);
 
             });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,6 +105,7 @@ namespace SmartSchool.WebAPI
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseSwagger()
             .UseSwaggerUI(opt => 
